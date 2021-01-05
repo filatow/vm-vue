@@ -35,8 +35,8 @@ const App = {
       }
     },
     setActive(ind) {
-      if (!this.reviewInProgress) return;
       console.log(`setActive`);
+      if (!this.reviewInProgress) return;
       this.activeIndex = ind;
     }
   },
@@ -44,7 +44,7 @@ const App = {
     isLastStep() {
       return this.activeIndex === this.steps.length - 1
     },
-    prevButtonDisabled() {
+    isPrevButtonDisabled() {
       return this.activeIndex === 0
     },
     nextButtonCapture() {

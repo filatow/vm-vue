@@ -30,7 +30,7 @@
             {{step.title}}
           </li>
         </ul>
-        <div v-if="reviewInProgress">
+        <div v-if="!isDone">
           <button
             class="btn"
             @click="prev"

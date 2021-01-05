@@ -13,17 +13,19 @@ const App = {
         {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
         {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
       ],
-      reviewInProgress: true
+      isDone: false
     }
   },
   methods: {
     prev() {
       console.log(`prev`);
-      this.activeIndex--;
+      if (this.activeIndex > 0) {
+        this.activeIndex--;
+      }
     },
     reset() {
       console.log(`reset`);
-      this.reviewInProgress = true;
+      this.isDone = false;
       this.activeIndex = 0;
     },
     nextOrFinish() {
@@ -31,12 +33,12 @@ const App = {
       if (!this.isLastStep) {
         this.activeIndex++;
       } else {
-        this.reviewInProgress = false;
+        this.isDone = true;
       }
     },
     setActive(ind) {
       console.log(`setActive`);
-      if (!this.reviewInProgress) return;
+      if (this.isDone) return;
       this.activeIndex = ind;
     }
   },

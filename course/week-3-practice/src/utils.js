@@ -6,7 +6,7 @@ export const asyncGetTasks = function() {
     try {
       setTimeout(() => {
         resolve(getTasks())
-      }, 0)
+      }, 350)
     } catch (e) {
       reject(e)
     }
@@ -21,7 +21,7 @@ export const asyncSetTasks = function(tasks) {
       setTimeout(() => {
         setTasks(tasks)
         resolve()  
-      }, 0);
+      }, 350);
     } catch (e) {
       reject(e)
     }

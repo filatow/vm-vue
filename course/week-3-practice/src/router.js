@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Tasks from './views/Tasks'
-import Task from './views/Task'
-import New from './views/New'
+const Tasks = () => import('./views/Tasks')
+const Task = () => import('./views/Task')
+const New =  () => import('./views/New')
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,7 +11,6 @@ const router = createRouter({
     { 
       path: '/task/:taskId',
       component: Task,
-      // children: [{ path: ':mailId', component: AppEmailBody, props: true }]
     },
   ],
   linkActiveClass: 'active',

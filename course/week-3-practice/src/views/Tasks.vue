@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import AppCard from '../components/AppCard.vue'
 
@@ -23,13 +23,9 @@ export default {
   components: { AppCard },
   setup() {
     const store = useStore()
-    const loading = ref(false)
+    const loading = computed(() => store.state.transferring)
 
-    loading.value = true
-    ;(async () => {
-      await store.dispatch('loadTasksDB')
-      loading.value = false
-    })()
+    store.dispatch('loadTasksDB')
 
     const tasks = computed(() => store.state.tasks)
     const activeTaskCount = computed(() => store.getters.activeTaskCount)

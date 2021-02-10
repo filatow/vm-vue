@@ -31,6 +31,12 @@ export default createStore({
       let task = state.tasks.find((task) => task.id === id)
       Object.assign(task, patch)
     },
+    startTrasferring(state) {
+      state.transferring = true
+    },
+    stopTrasferring(state) {
+      state.transferring = false
+    }
   },
   actions: {
     async loadTasksDB({ commit, state }) {
@@ -38,10 +44,10 @@ export default createStore({
         if (state.transferring) {
           console.warn('Загрузка списка задач была заблокирована');
         } else {
-          state.transferring = true
+          commit('startTrasferring')
           const tasks = await asyncGetTasks()
           commit('setTasks', tasks)
-          state.transferring = false
+          commit('stopTrasferring')
         }
       } catch (e) {
         console.error(e.message)
@@ -53,10 +59,10 @@ export default createStore({
         if (state.transferring) {
           throw new Error('Не удалось добавить новую задачу')
         } else {
-          state.transferring = true
+          commit('startTrasferring')
           commit('addTask', newTask)
           await asyncSetTasks(state.tasks)
-          state.transferring = false
+          commit('stopTrasferring')
         }
       } catch (e) {
         console.error(e.message)
@@ -68,10 +74,10 @@ export default createStore({
         if (state.transferring) {
           throw new Error('Не удалось обновить задачу')
         } else {
-          state.transferring = true
+          commit('startTrasferring')
           commit('updateTask', patch)
           await asyncSetTasks(state.tasks)
-          state.transferring = false
+          commit('stopTrasferring')
         }
       } catch (e) {
         console.error(e.message)

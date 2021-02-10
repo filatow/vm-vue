@@ -29,7 +29,7 @@ export default {
   setup() {
     const router = useRouter()
     const store = useStore()
-    
+
     const stored = {
       title: localStorage.getItem('NewTaskTitle'),
       date: localStorage.getItem('NewTaskDate'),
@@ -71,9 +71,10 @@ export default {
         description: description.value,
       }
 
-      store.dispatch('addTaskDB', newTask)
-      clearTemporaryFormData()
-      router.push('/')
+      store.dispatch('addTaskDB', newTask).then(() => {
+        clearTemporaryFormData()
+        router.push('/')
+      })
     }
 
     return {
